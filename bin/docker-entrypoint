@@ -12,9 +12,11 @@ if [ -f "$PID_FILE" ]; then
     echo "Killing process with PID 7"
     kill -9 7
     echo "Running database preparation..."
-    ./bin/rails db:prepare
-    # Execute the specified command
-    exec "${@}"
+    if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
+      ./bin/rails db:prepare
+      # Execute the specified command
+      exec "${@}"
+    fi
   fi
 
 else
