@@ -14,15 +14,14 @@ if [ -f "$PID_FILE" ]; then
   else
       echo "Error: Failed to delete file $PID_FILE."
   fi
-
-  # If the SERVER_STARTED environment variable is set, it means the server has been started before
+  
   echo "Server has been started before. Running start_server.sh..."
   
   if ps -p 7 > /dev/null; then
-    # Run start_server.sh
-    # ./start_server.sh
-    echo "Killing process with PID 7"
-    kill -9 7
+    echo "Run start_server.sh"
+    ./start_server.sh
+    # echo "Killing process with PID 7"
+    # kill -9 7
   fi
   echo "executing rails server"
   ./bin/rails server

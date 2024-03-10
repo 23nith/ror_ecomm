@@ -8,7 +8,6 @@ if ps -p 7 > /dev/null; then
     kill -9 7
 fi
 
-echo "executing rails server"
-exec ./bin/rails server
+echo "executing docker-entrypoint"
+./docker-entrypoint
 
-echo "Rails server started successfully."
