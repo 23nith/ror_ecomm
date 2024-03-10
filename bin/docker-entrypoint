@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 # Check if the SERVER_STARTED environment variable is set
-if [ -n "$SERVER_STARTED" ]; then
+if pgrep -x "puma" >/dev/null; then
   # If the SERVER_STARTED environment variable is set, it means the server has been started before
   echo "Server has been started before. Running start_server.sh..."
   
@@ -17,8 +17,6 @@ else
     ./bin/rails db:prepare
   fi
 
-  # Set the SERVER_STARTED environment variable to indicate that the server has been started
-  export SERVER_STARTED=true
 
   # Execute the specified command
   exec "${@}"
