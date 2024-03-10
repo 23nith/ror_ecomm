@@ -11,8 +11,10 @@ if [ -f "$PID_FILE" ]; then
   if ps -p 7 > /dev/null; then
      # Run start_server.sh
     ./start_server.sh
+
+    echo "testing back to docker-entrypoint"
   fi
-  
+
   echo "Running database preparation..."
   if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
     ./bin/rails db:prepare
