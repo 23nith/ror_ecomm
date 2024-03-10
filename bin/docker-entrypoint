@@ -19,7 +19,7 @@ if [ -f "$PID_FILE" ]; then
   if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
     ./bin/rails db:prepare
     # Execute the specified command
-    exec "${@}"
+    # exec "${@}"
   fi
 
 else
@@ -34,7 +34,8 @@ else
 
 
   # Execute the specified command
-  exec "${@}"
+  # exec "${@}"
+  ./bin/rails server
 fi
 
 
