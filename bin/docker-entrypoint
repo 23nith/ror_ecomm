@@ -9,20 +9,13 @@ if [ -f "$PID_FILE" ]; then
   echo "Server has been started before. Running start_server.sh..."
   
   if ps -p 7 > /dev/null; then
-     # Run start_server.sh
-    ./start_server.sh
-
-    echo "testing back to docker-entrypoint"
+    # Run start_server.sh
+    # ./start_server.sh
+    echo "Killing process with PID 7"
+    kill -9 7
   fi
-
-  echo "Running database preparation..."
-  if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
-    ./bin/rails db:prepare
-    # Execute the specified command
-    # exec "${@}"
-    ./bin/rails server
-  fi
-
+  echo "executing rails server"
+  ./bin/rails server
 else
   # If the SERVER_STARTED environment variable is not set, it means this is the first start of the server
   echo "First start of the server. Running database preparation..."  
@@ -33,9 +26,7 @@ else
     ./bin/rails db:prepare
   fi
 
-
   # Execute the specified command
-  # exec "${@}"
   ./bin/rails server
 fi
 
