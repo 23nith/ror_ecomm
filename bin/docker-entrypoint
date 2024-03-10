@@ -9,15 +9,15 @@ if [ -f "$PID_FILE" ]; then
   echo "Server has been started before. Running start_server.sh..."
   
   if ps -p 7 > /dev/null; then
-    echo "Killing process with PID 7"
-    kill -9 7
-    sleep 60
-    echo "Running database preparation..."
-    if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
-      ./bin/rails db:prepare
-      # Execute the specified command
-      exec "${@}"
-    fi
+     # Run start_server.sh
+    ./start_server.sh
+  fi
+  
+  echo "Running database preparation..."
+  if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
+    ./bin/rails db:prepare
+    # Execute the specified command
+    exec "${@}"
   fi
 
 else
