@@ -8,21 +8,23 @@ if [ -f "$PID_FILE" ]; then
   # If the SERVER_STARTED environment variable is set, it means the server has been started before
   echo "Server has been started before. Running start_server.sh..."
   
-  # Run start_server.sh
-  ./start_server.sh
+  if ps -p 7 > /dev/null; then
+    echo "Killing process with PID 7"
+    kill -9 7
+  fi
 else
   # If the SERVER_STARTED environment variable is not set, it means this is the first start of the server
-  echo "First start of the server. Running database preparation..."
-
-  # Run database preparation
-  if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
-    echo "Running database preparation..."
-    ./bin/rails db:prepare
-  fi
-
-
-  # Execute the specified command
-  exec "${@}"
+  echo "First start of the server. Running database preparation..."  
 fi
+
+# Run database preparation
+if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
+  echo "Running database preparation..."
+  ./bin/rails db:prepare
+fi
+
+
+# Execute the specified command
+exec "${@}"
 
 
