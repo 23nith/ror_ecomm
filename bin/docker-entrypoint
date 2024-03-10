@@ -1,8 +1,18 @@
 #!/bin/bash -e
 
-# If running the rails server then create or migrate existing database
-if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
+# Check if marker file exists indicating that the server has been started before
+if [ -f /rails/server_started ]; then
+  # Run start_server.sh if the marker file exists
   ./start_server.sh
+else
+  # Create a marker file to indicate that the server has been started
+  echo "creating server_started file"
+  touch /rails/server_started
+  # If running the rails server then create or migrate existing database
+  if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
+    echo "rails db:prepare will execute"
+    ./bin/rails db:prepare
+  fi
 fi
 
 exec "${@}"
