@@ -17,10 +17,5 @@ echo "testing.."
 # fi
 
 # Attempt to start the Rails server
-echo "Attempting to start Rails server on port $PORT..."
-if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
-    echo "Running database preparation..."
-    ./bin/rails db:prepare
-fi
 
-echo "Rails server started successfully."
+# echo "Rails server started successfully."
