@@ -19,7 +19,12 @@ echo "testing.."
 # Attempt to start the Rails server
 # if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
 echo "executing rails db:prepare"
-./bin/rails db:prepare
+if ./bin/rails db:prepare; then
+    echo "Rails database prepared successfully."
+else
+    echo "Error: Rails database preparation failed."
+    exit 1  # Exit the script with an error status code
+fi
     # Execute the specified command
     # exec "${@}"
 echo "executing rails server"
