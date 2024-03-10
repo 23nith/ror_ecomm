@@ -5,6 +5,16 @@ PID_FILE="/rails/tmp/pids/server.pid"
 
 # Check if the PID file exists
 if [ -f "$PID_FILE" ]; then
+  echo "Removing $PID_FILE..."
+  rm "$PID_FILE"
+
+  # Check the exit status of the rm command
+  if [ $? -eq 0 ]; then
+      echo "File $PID_FILE deleted successfully."
+  else
+      echo "Error: Failed to delete file $PID_FILE."
+  fi
+
   # If the SERVER_STARTED environment variable is set, it means the server has been started before
   echo "Server has been started before. Running start_server.sh..."
   
