@@ -1,7 +1,10 @@
 #!/bin/bash -e
 
-# Check if the SERVER_STARTED environment variable is set
-if netstat -tuln | grep ':3000 ' >/dev/null; then
+# Define the path to the PID file
+PID_FILE="/rails/tmp/pids/server.pid"
+
+# Check if the PID file exists
+if [ -f "$PID_FILE" ]; then
   # If the SERVER_STARTED environment variable is set, it means the server has been started before
   echo "Server has been started before. Running start_server.sh..."
   
