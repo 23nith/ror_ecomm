@@ -8,8 +8,8 @@ if ps -p 7 > /dev/null; then
     kill -9 7
 fi
 
-echo "exit 1"
-exit 1
+echo "exec exit 1"
+exec exit 1
 # echo "executing docker-entrypoint"
 # ./bin/docker-entrypoint
 
