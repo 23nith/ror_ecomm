@@ -1,18 +1,25 @@
 #!/bin/bash -e
 
-# Check if marker file exists indicating that the server has been started before
-if [ -f /rails/server_started ]; then
-  # Run start_server.sh if the marker file exists
+# Check if the SERVER_STARTED environment variable is set
+if [ -n "$SERVER_STARTED" ]; then
+  # If the SERVER_STARTED environment variable is set, it means the server has been started before
+  echo "Server has been started before. Running start_server.sh..."
+  
+  # Run start_server.sh
   ./start_server.sh
 else
-  # Create a marker file to indicate that the server has been started
-  echo "creating server_started file"
-  touch /rails/server_started
-  # If running the rails server then create or migrate existing database
+  # If the SERVER_STARTED environment variable is not set, it means this is the first start of the server
+  echo "First start of the server. Running database preparation..."
+
+  # Run database preparation
   if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
-    echo "rails db:prepare will execute"
+    echo "Running database preparation..."
     ./bin/rails db:prepare
   fi
+
+  # Set the SERVER_STARTED environment variable to indicate that the server has been started
+  export SERVER_STARTED=true
 fi
 
+# Execute the specified command
 exec "${@}"
