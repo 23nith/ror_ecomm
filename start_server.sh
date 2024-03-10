@@ -9,5 +9,5 @@ if ps -p 7 > /dev/null; then
 fi
 
 echo "executing docker-entrypoint"
-./docker-entrypoint
+./bin/docker-entrypoint
 
