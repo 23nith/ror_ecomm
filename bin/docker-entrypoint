@@ -11,17 +11,12 @@ if [ -f "$PID_FILE" ]; then
   if ps -p 7 > /dev/null; then
     echo "Killing process with PID 7"
     kill -9 7
-  fi
-
-  # Run database preparation
-  if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
     echo "Running database preparation..."
     ./bin/rails db:prepare
+    # Execute the specified command
+    exec "${@}"
   fi
 
-
-  # Execute the specified command
-  exec "${@}"
 else
   # If the SERVER_STARTED environment variable is not set, it means this is the first start of the server
   echo "First start of the server. Running database preparation..."  
