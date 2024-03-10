@@ -19,7 +19,9 @@ else
 
   # Set the SERVER_STARTED environment variable to indicate that the server has been started
   export SERVER_STARTED=true
+
+  # Execute the specified command
+  exec "${@}"
 fi
 
-# Execute the specified command
-exec "${@}"
+
