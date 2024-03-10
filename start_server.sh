@@ -9,10 +9,10 @@ if ps -p 7 > /dev/null; then
 fi
 
 # Ensure the server.pid file does not exist to prevent conflicts
-if [ -f tmp/pids/server.pid ]; then
-    echo "Removing existing server.pid file"
-    rm tmp/pids/server.pid
-fi
+# if [ -f tmp/pids/server.pid ]; then
+#     echo "Removing existing server.pid file"
+#     rm tmp/pids/server.pid
+# fi
 
 # Attempt to start the Rails server
 echo "Attempting to start Rails server on port $PORT..."
