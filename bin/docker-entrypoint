@@ -20,6 +20,7 @@ if [ -f "$PID_FILE" ]; then
     ./bin/rails db:prepare
     # Execute the specified command
     # exec "${@}"
+    ./bin/rails server
   fi
 
 else

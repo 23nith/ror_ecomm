@@ -17,5 +17,13 @@ echo "testing.."
 # fi
 
 # Attempt to start the Rails server
+# if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
+echo "executing rails db:prepare"
+./bin/rails db:prepare
+    # Execute the specified command
+    # exec "${@}"
+echo "executing rails server"
+./bin/rails server
+# fi
 
-# echo "Rails server started successfully."
+echo "Rails server started successfully."
