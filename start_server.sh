@@ -16,9 +16,9 @@ fi
 
 # Attempt to start the Rails server
 echo "Attempting to start Rails server on port $PORT..."
-if ! ./bin/rails server -b 0.0.0.0 -p $PORT; then
-    echo "Failed to start Rails server. Check the logs for more details."
-    exit 1
+if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
+    echo "Running database preparation..."
+    ./bin/rails db:prepare
 fi
 
 echo "Rails server started successfully."
