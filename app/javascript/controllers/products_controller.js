@@ -2,15 +2,25 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="products"
 export default class extends Controller {
-  static values = {size: String, product: Object}
-  addToCart(){
-    console.log("product: ", this.productValue)
-    const cart = localStorage.getItem("cart")
-    if(cart){
-      const cartArray = JSON.parse(cart)
-      const foundIndex = cartArray.findIndex(item => item.id === this.productValue.id && item.size == this.sizeValue)
-      if(foundIndex >= 0){
-        cartArray[foundIndex].quantity = parseInt(cartArray[foundIndex].quantity) + 1 
+  static values = { size: String, product: Object }
+
+  addToCart() {
+    if (!this.sizeValue) {
+      // Show alert message if size is not selected
+      document.getElementById("alert-message").classList.remove("hidden");
+      return;
+    }
+
+    // If size is selected, proceed with adding to cart
+    console.log("product: ", this.productValue);
+    const cart = localStorage.getItem("cart");
+    if (cart) {
+      const cartArray = JSON.parse(cart);
+      const foundIndex = cartArray.findIndex(
+        (item) => item.id === this.productValue.id && item.size == this.sizeValue
+      );
+      if (foundIndex >= 0) {
+        cartArray[foundIndex].quantity = parseInt(cartArray[foundIndex].quantity) + 1;
       } else {
         cartArray.push({
           id: this.productValue.id,
@@ -35,8 +45,10 @@ export default class extends Controller {
   }
 
   selectSize(e){
-    this.sizeValue = e.target.value
-    const selectedSizeEl = document.getElementById("selected-size")
-    selectedSizeEl.innerText = `Selected size: ${this.sizeValue}`
+    // Hide alert message when size is selected
+    document.getElementById("alert-message").classList.add("hidden");
+    this.sizeValue = e.target.value;
+    const selectedSizeEl = document.getElementById("selected-size");
+    selectedSizeEl.innerText = `Selected size: ${this.sizeValue}`;
   }
 }

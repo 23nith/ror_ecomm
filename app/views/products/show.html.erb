@@ -26,5 +26,17 @@
         </div>
         <div id="selected-size"></div>
         <button data-action="click->products#addToCart" class="inline-flex items-center justify-center px-5 py-3 border border-transparent font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">Add to Cart</button>
+        <!-- Alert message -->
+        <div id="alert-message" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4" role="alert">
+            <strong class="font-bold">Attention!</strong>
+            <span class="block sm:inline"> Please select a size before adding to cart.</span>
+            <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <title>Close</title>
+                    <path fill-rule="evenodd" d="M14.354 5.354a1 1 0 011.414 1.414L11.414 10l4.354 4.354a1 1 0 01-1.414 1.414L10 11.414l-4.354 4.354a1 1 0 01-1.414-1.414L8.586 10 4.232 5.646a1 1 0 111.414-1.414L10 8.586l4.354-4.354z" clip-rule="evenodd"></path>
+                </svg>
+            </span>
+        </div>
     </div>
+
 </div>
